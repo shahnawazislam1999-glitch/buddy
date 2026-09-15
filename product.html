@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BuddyMart Product</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222}.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;background:#222;color:#fff}.nav button{width:auto;margin:0;padding:9px 13px;border:0;border-radius:9px;background:#1677ff;color:#fff;font-weight:700}.brand{font-size:19px;font-weight:800}.page{max-width:900px;margin:18px auto;padding:0 12px}.back{margin-bottom:12px}.product-detail{background:#fff;border:2px solid #f3a0a0;border-radius:20px;padding:12px;box-shadow:0 4px 18px rgba(0,0,0,.1)}.gallery-main{width:100%;height:min(55vw,500px);min-height:250px;object-fit:cover;border-radius:15px;background:#ddd}.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:9px}.thumb{width:100%;height:75px;object-fit:cover;border-radius:9px;border:2px solid transparent;cursor:pointer}.thumb.active{border-color:#f08f8f}.title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:15px}.title{font-size:30px;margin:0}.heart{width:46px;height:46px;padding:0;margin:0;border:0;border-radius:50%;background:#fff0f2;color:#ef233c;font-size:27px}.type{display:inline-block;margin-top:9px;padding:6px 10px;border-radius:999px;background:#222;color:#fff;font-size:12px;font-weight:800}.price{font-size:26px;font-weight:800;margin:13px 0}.description{font-size:16px;line-height:1.55;color:#555}.features{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:15px 0}.feature{padding:10px;border-radius:10px;background:#f7f7f7;font-size:14px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.actions button{padding:13px;border:0;border-radius:11px;color:#fff;font-size:15px;font-weight:800}.cart{background:#1677ff}.now{background:#222}.later{background:#6b4eff}.full{grid-column:1/-1}.panel{display:none;margin-top:14px;padding:15px;border-radius:14px;background:#fff;border:1px solid #ddd}.panel.show{display:block}.panel h3{margin:0 0 10px}.tiprow{display:flex;gap:8px}.input{width:100%;padding:11px;border:1px solid #bbb;border-radius:8px;font-size:16px;background:#fff}.tiprow .input{flex:1}.tiprow button{width:auto;margin:0;padding:10px 15px;border:0;border-radius:8px;background:#1677ff;color:#fff;font-weight:700}.total{margin-top:9px;text-align:right;font-weight:800}.message{min-height:20px;margin-top:9px;text-align:center;font-weight:700}.search-time{margin:10px 0;padding:12px;background:#f2f2f2;border-radius:9px;text-align:center;font-size:18px}.warning{display:none;margin:10px 0;padding:11px;border-radius:9px;background:#fff4e5;border:1px solid #ffd08a;color:#9a5200;font-weight:700;line-height:1.45}.warning.show{display:block}.panel-actions{display:flex;gap:8px}.panel-actions button{flex:1;padding:11px;border:0;border-radius:9px;color:#fff;font-weight:800}.cancel{background:#d93025}.send{background:#1677ff}.cart-item{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #eee}.empty{color:#777;padding:10px 0}.notice{padding:11px;border-radius:9px;background:#eef6ff;border:1px solid #b9d8ff;color:#1557a6;font-weight:700;line-height:1.45}.footer{text-align:center;margin:30px 0;color:#777;font-size:13px}@media(max-width:600px){.page{margin:10px auto;padding:0 7px}.product-detail{padding:7px;border-radius:15px}.gallery-main{height:58vw;min-height:190px}.thumb{height:58px}.title{font-size:22px}.price{font-size:22px}.features{grid-template-columns:1fr}.actions{grid-template-columns:1fr 1fr}.actions button{padding:11px;font-size:14px}}
+</style>
+</head>
+<body>
+<nav class="nav"><button id="backBtn" type="button">← Store</button><div class="brand">🛍️ BuddyMart</div><button id="cartNav" type="button">🛒 <span id="cartCount">0</span></button></nav>
+<main class="page">
+  <div class="back"><button id="backBtn2" type="button" style="width:auto;margin:0;padding:8px 12px;border:0;border-radius:8px;background:#fff;border:1px solid #ddd">← Back to products</button></div>
+  <section class="product-detail">
+    <img id="mainImage" class="gallery-main" src="" alt="Product image">
+    <div id="thumbs" class="thumbs"></div>
+    <div class="title-row"><h1 id="productName" class="title"></h1><button id="favoriteBtn" class="heart" type="button">♡</button></div>
+    <div id="productType" class="type"></div>
+    <div id="productPrice" class="price"></div>
+    <p id="productDescription" class="description"></p>
+    <div id="features" class="features"></div>
+    <div class="actions">
+      <button id="cartBtn" class="cart" type="button">🛒 Add to Cart</button>
+      <button id="nowBtn" class="now" type="button"></button>
+      <button id="laterBtn" class="later" type="button"></button>
+    </div>
+
+    <section id="searchPanel" class="panel">
+      <h3 id="searchTitle">🔎 Searching for nearby buddy</h3>
+      <div id="searchStatus">Please wait while we find a nearby buddy.</div>
+      <div class="search-time">Searching time: <strong id="searchTimer">0s</strong></div>
+      <div id="warning" class="warning">⚠️ We’re facing a shortage of buddy.<br>Please go with the <strong>Order Later</strong> option.</div>
+      <div class="tiprow"><input id="nowTip" class="input" type="number" min="0" step="1" placeholder="Add tip (₹)"><button id="sendNowTip" type="button">Send Tip</button></div>
+      <div id="nowTipMessage" class="message"></div>
+      <div id="nowTotal" class="total">Total: ₹0</div>
+      <div class="panel-actions"><button id="cancelSearch" class="cancel" type="button">Cancel</button></div>
+    </section>
+
+    <section id="laterPanel" class="panel">
+      <h3 id="laterTitle">📅 Order Later</h3>
+      <label>Date</label><input id="laterDate" class="input" type="date">
+      <label style="display:block;margin-top:10px">Time</label><input id="laterTime" class="input" type="time">
+      <div style="margin-top:12px"><label>Add Tip</label><div class="tiprow" style="margin-top:6px"><input id="laterTip" class="input" type="number" min="0" step="1" placeholder="Add tip (₹)"><button id="sendLaterTip" type="button">Send Tip</button></div></div>
+      <div id="laterTipMessage" class="message"></div>
+      <div id="laterTotal" class="total">Product (0) + Tip (0) = Total: ₹0</div>
+      <button id="sendLater" class="send" type="button" style="width:100%;margin-top:13px">Send</button>
+      <div id="laterMessage" class="message"></div>
+      <div id="laterNotice"></div>
+    </section>
+
+    <section id="cartPanel" class="panel">
+      <h3>Your Cart</h3><div id="cartItems"></div>
+      <div class="tiprow" style="margin-top:12px"><input id="cartTip" class="input" type="number" min="0" step="1" placeholder="Add cart tip (₹)"><button id="sendCartTip" type="button">＋ Tip</button></div>
+      <div id="cartTipMessage" class="message"></div>
+      <div id="cartFormula" class="total">Product (0) + Tip (0)</div><div id="cartTotal" class="total">Total: ₹0</div>
+      <button id="buyAll" class="send" type="button" style="width:100%;margin-top:12px">🛍️ Order All</button>
+    </section>
+  </section>
+</main>
+<div class="footer">🛍️ BuddyMart · Simple shopping, made easier.</div>
+<script>
+const products={
+  "Kurkuray":{type:"grocery",price:499,description:"Crunchy and tasty Kurkuray snack, perfect for a quick and enjoyable bite.",images:[1,11,21,31],features:["🥨 Crunchy snack","⚡ Quick bite","🛍️ Grocery item","📦 Easy ordering"]},
+  "Dairy Milk":{type:"grocery",price:799,description:"Smooth and delicious Dairy Milk chocolate made for a sweet and satisfying treat.",images:[2,12,22,32],features:["🍫 Smooth chocolate","🎁 Great for treats","🛍️ Grocery item","📦 Easy ordering"]},
+  "Oil":{type:"grocery",price:999,description:"Quality everyday cooking oil suitable for preparing a variety of tasty meals.",images:[3,13,23,33],features:["🍳 Everyday cooking","🥘 Meal friendly","🛍️ Grocery item","📦 Easy ordering"]},
+  "Soap":{type:"grocery",price:1299,description:"Gentle everyday soap designed to help keep your skin clean and fresh.",images:[4,14,24,34],features:["🧼 Daily use","✨ Fresh feeling","🛍️ Grocery item","📦 Easy ordering"]},
+  "Deluxe King Room":{type:"hotel",price:3499,description:"Comfortable deluxe king room with complimentary Wi-Fi, breakfast, air conditioning and a city view.",images:[15,25,35,45],features:["🛏️ King bed","📶 Wi-Fi","🍳 Breakfast","❄️ Air conditioning"]},
+  "Premium Suite":{type:"hotel",price:5999,description:"Spacious premium suite with a private sitting area, complimentary breakfast and high-speed Wi-Fi.",images:[16,26,36,46],features:["🛋️ Sitting area","📶 High-speed Wi-Fi","🍳 Breakfast","🏨 Premium stay"]}
+};
+const params=new URLSearchParams(location.search);const requested=params.get("product")||"Kurkuray";const product=products[requested]||products["Kurkuray"];
+const name=requested in products?requested:"Kurkuray"; const money=n=>"₹"+Number(n).toLocaleString("en-IN");
+const typeLabel=product.type==="hotel"?"ROOM":"GROCERY";
+document.title=name+" · BuddyMart";document.getElementById("productName").textContent=name;document.getElementById("productType").textContent=typeLabel;document.getElementById("productPrice").textContent=money(product.price)+(product.type==="hotel"?" / night":"");document.getElementById("productDescription").textContent=product.description;
+document.getElementById("features").innerHTML=product.features.map(x=>`<div class="feature">${x}</div>`).join("");
+const mainImage=document.getElementById("mainImage"),thumbs=document.getElementById("thumbs");product.images.forEach((seed,i)=>{const src=`https://picsum.photos/900/700?random=${seed}`;const b=document.createElement("img");b.className="thumb";b.src=src;b.alt=name+" image "+(i+1);b.addEventListener("click",()=>{mainImage.src=src;document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));b.classList.add('active')});thumbs.appendChild(b);if(i===0){mainImage.src=src;b.classList.add('active')}});
+const action=product.type==="hotel"?{now:"🏨 Book Room",later:"📅 Book Later",searchTitle:"🏨 Searching for hotel room",status:"Please wait while we check room availability.",warning:"⚠️ We’re facing a shortage of available rooms.<br>Please go with the <strong>Book Later</strong> option."}:{now:"🛍️ Order Now",later:"📅 Order Later",searchTitle:"🔎 Searching for nearby buddy",status:"Please wait while we find a nearby buddy.",warning:"⚠️ We’re facing a shortage of buddy.<br>Please go with the <strong>Order Later</strong> option."};
+nowBtn.textContent=action.now;laterBtn.textContent=action.later;searchTitle.textContent=action.searchTitle;searchStatus.textContent=action.status;warning.innerHTML=action.warning;laterTitle.textContent=action.later;sendLater.textContent=product.type==="hotel"?"🏨 Send Booking Request":"🛍️ Send Order";buyAll.textContent=product.type==="hotel"?"🏨 Book All":"🛍️ Order All";
+function goStore(){location.href="index.html"}backBtn.onclick=goStore;backBtn2.onclick=goStore;
+let favorites=[];try{favorites=JSON.parse(localStorage.getItem('buddyFavorites')||'[]')}catch(e){}function syncFav(){const yes=favorites.includes(name);favoriteBtn.textContent=yes?'❤️':'♡'}syncFav();favoriteBtn.onclick=()=>{const i=favorites.indexOf(name);if(i>=0)favorites.splice(i,1);else favorites.push(name);localStorage.setItem('buddyFavorites',JSON.stringify(favorites));syncFav()};
+let cart=[];try{cart=JSON.parse(localStorage.getItem('buddyCart')||'[]')}catch(e){}function saveCart(){localStorage.setItem('buddyCart',JSON.stringify(cart))}function syncCart(){cartCount.textContent=cart.length;const inCart=cart.some(x=>x.name===name);cartBtn.textContent=inCart?'✓ Remove from Cart':'🛒 Add to Cart'}function addCurrent(){const i=cart.findIndex(x=>x.name===name);if(i>=0)cart.splice(i,1);else cart.push({name,price:product.price,type:product.type});saveCart();syncCart();renderCart()}cartBtn.onclick=addCurrent;syncCart();
+const searchPanel=document.getElementById('searchPanel'),laterPanel=document.getElementById('laterPanel'),cartPanel=document.getElementById('cartPanel');let timer=null,seconds=0,currentAmount=product.price;
+function updateNowTotal(){const tip=Math.max(0,Number(nowTip.value)||0);nowTotal.textContent='Total: '+money(currentAmount+tip)}nowTip.oninput=updateNowTotal;
+nowBtn.onclick=()=>{if(timer)return;laterPanel.classList.remove('show');cartPanel.classList.remove('show');searchPanel.classList.add('show');seconds=0;searchTimer.textContent='0s';warning.classList.remove('show');nowTip.value='';nowTipMessage.textContent='';currentAmount=product.price;updateNowTotal();timer=setInterval(()=>{seconds++;searchTimer.textContent=seconds+'s';if(seconds>=5)warning.classList.add('show')},1000)};
+cancelSearch.onclick=()=>{clearInterval(timer);timer=null;seconds=0;searchPanel.classList.remove('show')};
+sendNowTip.onclick=()=>{const tip=Math.max(0,Number(nowTip.value)||0);const a=JSON.parse(localStorage.getItem('buyNowTips')||'[]');a.push({product:name,tip,createdAt:new Date().toISOString()});localStorage.setItem('buyNowTips',JSON.stringify(a));nowTipMessage.textContent=tip?`Tip of ${money(tip)} added.`:'No tip added.';updateNowTotal()};
+function setDefaultDate(){const d=new Date();d.setSeconds(0,0);d.setMinutes(d.getMinutes()+1);laterDate.value=d.toISOString().slice(0,10);laterTime.value=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function updateLaterTotal(){const tip=Math.max(0,Number(laterTip.value)||0);laterTotal.textContent=`Product (${Number(product.price).toLocaleString('en-IN')}) + Tip (${tip.toLocaleString('en-IN')}) = Total: ${money(product.price+tip)}`}laterTip.oninput=updateLaterTotal;
+laterBtn.onclick=()=>{searchPanel.classList.remove('show');cartPanel.classList.remove('show');laterPanel.classList.add('show');laterMessage.textContent='';laterNotice.innerHTML='';laterTip.value='';laterTipMessage.textContent='';setDefaultDate();updateLaterTotal()};
+sendLaterTip.onclick=()=>{const tip=Math.max(0,Number(laterTip.value)||0);const a=JSON.parse(localStorage.getItem('buyLaterTips')||'[]');a.push({product:name,price:product.price,tip,createdAt:new Date().toISOString()});localStorage.setItem('buyLaterTips',JSON.stringify(a));laterTipMessage.textContent=tip?`Tip of ${money(tip)} sent.`:'No tip added.';updateLaterTotal()};
+sendLater.onclick=()=>{if(!laterDate.value||!laterTime.value){laterMessage.textContent='Please select both date and time.';return}const requestedAt=new Date(laterDate.value+'T'+laterTime.value);if(Number.isNaN(requestedAt.getTime())||requestedAt.getTime()<=Date.now()){laterMessage.textContent='Please choose a future date and time.';return}const tip=Math.max(0,Number(laterTip.value)||0);const a=JSON.parse(localStorage.getItem('buyLaterRequests')||'[]');a.push({product:name,type:product.type,price:product.price,tip,total:product.price+tip,requestedDate:laterDate.value,requestedTime:laterTime.value,createdAt:new Date().toISOString()});localStorage.setItem('buyLaterRequests',JSON.stringify(a));laterMessage.textContent='Request sent for '+laterDate.value+' at '+laterTime.value+'.';laterNotice.innerHTML=product.type==='hotel'?'<div class="notice">🔔 We got your room booking request. You’ll see a notification once the room is confirmed.</div>':'<div class="notice">🔔 We got your order. You’ll see a notification once a buddy accepts your order.</div>'};
+function renderCart(){cartItems.innerHTML='';if(!cart.length){cartItems.innerHTML='<div class="empty">Your cart is empty.</div>';cartFormula.textContent='Product (0) + Tip (0)';cartTotal.textContent='Total: ₹0';return}let total=0;cart.forEach((x,i)=>{total+=Number(x.price)||0;const row=document.createElement('div');row.className='cart-item';row.innerHTML=`<span><strong>${x.name}</strong><br>${money(x.price)}</span><button style="width:auto;margin:0;padding:7px 10px;border:0;border-radius:7px;background:#d93025;color:#fff" type="button">Remove</button>`;row.querySelector('button').onclick=()=>{cart.splice(i,1);saveCart();syncCart();renderCart()};cartItems.appendChild(row)});const tip=Math.max(0,Number(cartTip.value)||0);cartFormula.textContent=`Product (${total.toLocaleString('en-IN')}) + Tip (${tip.toLocaleString('en-IN')})`;cartTotal.textContent='Total: '+money(total+tip)}
+cartNav.onclick=()=>{searchPanel.classList.remove('show');laterPanel.classList.remove('show');cartPanel.classList.toggle('show');renderCart()};cartTip.oninput=renderCart;sendCartTip.onclick=()=>{cartTipMessage.textContent='Cart tip updated.';renderCart()};buyAll.onclick=()=>{if(!cart.length){alert('Your cart is empty.');return}currentAmount=cart.reduce((s,x)=>s+(Number(x.price)||0),0)+(Math.max(0,Number(cartTip.value)||0));cartPanel.classList.remove('show');searchPanel.classList.add('show');seconds=0;searchTimer.textContent='0s';warning.classList.remove('show');if(timer)clearInterval(timer);timer=setInterval(()=>{seconds++;searchTimer.textContent=seconds+'s';if(seconds>=5)warning.classList.add('show')},1000);updateNowTotal()};renderCart();
+</script>
+</body>
+</html>
